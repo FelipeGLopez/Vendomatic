@@ -5,10 +5,10 @@ import axios from "axios";
 
 const MachineStorePage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [beverageList, setBeverageList] = useState([]);
-
+  const [beverages, setBeverages] = useState([]);
   const [coins, setCoins] = useState(0);
   const [text, setText] = useState("");
+
   const insertCoinHandler = (coin) => {
     axios
       .put("http://localhost:8000/", { coin })
@@ -37,11 +37,10 @@ const MachineStorePage = () => {
     fetch("http://localhost:8000/inventory/")
       .then((response) => response.json())
       .then(
-        (data) => setBeverageList(data),
+        (data) => setBeverages(data),
         (error) => console.log(error)
       );
 
-    console.log("beverageList", beverageList);
     setIsLoading(false);
   }, []);
 
@@ -49,7 +48,7 @@ const MachineStorePage = () => {
     <>
       {!isLoading && (
         <>
-          <BeverageList items={beverageList} setCoins={setCoins} />
+          <BeverageList items={beverages} setCoins={setCoins} />
           <div>Current credit: {coins} quarter coins</div>
           <div>{text}</div>
           <button onClick={() => insertCoinHandler(1)}>

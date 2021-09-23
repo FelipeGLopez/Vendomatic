@@ -6,7 +6,7 @@ const BeverageList = (props) => {
 
   const buyItem = (id) => {
     axios
-      .put(`http://localhost:8000/inventory/${id}`)
+      .put(`http://localhost:8000/inventory/${id}/`)
       .then((response) => response.headers)
       .then(
         (data) => {
