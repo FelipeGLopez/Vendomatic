@@ -12,7 +12,7 @@
         "model": "inventory.beverage",
         "pk": 2,
         "fields": {
-            "name": "Sprinkle Water",
+            "name": "Sparkling Water",
             "value": 0.50,
             "quantity": 5
         }
