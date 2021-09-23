@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class InventoryViewSet(viewsets.ViewSet):
     def list(self, request):
-        beverages = Beverage.objects.filter(quantity__gt=0)
+        beverages = Beverage.objects.all()
         serializer = BeverageSerializer(beverages, many=True)
         return Response(data=serializer.data)
 
