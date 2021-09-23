@@ -34,7 +34,8 @@ const MachineStorePage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    fetch("http://localhost:8000/inventory/")
+    axios
+      .get("http://localhost:8000/inventory/")
       .then((response) => response.json())
       .then(
         (data) => setBeverages(data),
@@ -42,13 +43,17 @@ const MachineStorePage = () => {
       );
 
     setIsLoading(false);
-  }, []);
+  }, [coins]);
 
   return (
     <>
       {!isLoading && (
         <>
-          <BeverageList items={beverages} setCoins={setCoins} />
+          <BeverageList
+            items={beverages}
+            setCoins={setCoins}
+            setText={setText}
+          />
           <div>Current credit: {coins} quarter coins</div>
           <div>{text}</div>
           <button onClick={() => insertCoinHandler(1)}>
