@@ -27,6 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Just for using in localhost environment
+CORS_ORIGIN_ALLOW_ALL = True
+
+# Just for using in localhost environment
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 
 # Application definition
 
@@ -37,6 +49,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",  # Just for using in localhost environment
+    "rest_framework",
+    "inventory",
+    "payment",
 ]
 
 MIDDLEWARE = [
@@ -47,6 +63,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # Just for using in localhost environment
+    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Just for using in localhost environment
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -123,3 +141,9 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Maximum coins allowed
+MAX_COINS_ALLOWED = 1
+
+# Maximum items allowed per beverage
+MAX_ITEMS_PER_BEVERAGE = 5
