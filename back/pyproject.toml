@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "vendomatic"
+version = "0.1.0"
+description = "Campaign Monitor Project"
+authors = ["Felipe <fglf18@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^3.2.7"
+djangorestframework = "^3.12.4"
+
+[tool.poetry.dev-dependencies]
+black = "^21.9b0"
+flake8 = "^3.9.2"
+isort = "^5.9.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
