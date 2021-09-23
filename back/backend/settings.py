@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = False
+
 # Just for using in localhost environment
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -39,6 +41,12 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+# Gets extra info for the API calls
+CORS_EXPOSE_HEADERS = (
+    "X-Coins",
+    "X-Inventory-Remaining",
+)
 
 # Application definition
 
