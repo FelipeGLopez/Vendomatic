@@ -1,0 +1,29 @@
+[
+    {
+        "model": "inventory.beverage",
+        "pk": 1,
+        "fields": {
+            "name": "Pepsi",
+            "value": 0.50,
+            "quantity": 5
+        }
+    },
+    {
+        "model": "inventory.beverage",
+        "pk": 2,
+        "fields": {
+            "name": "Sprinkle Water",
+            "value": 0.50,
+            "quantity": 5
+        }
+    },
+    {
+        "model": "inventory.beverage",
+        "pk": 3,
+        "fields": {
+            "name": "Limol",
+            "value": 0.50,
+            "quantity": 5
+        }
+    }
+]

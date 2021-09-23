@@ -1,0 +1,11 @@
+[
+    {
+        "model": "payment.coin",
+        "pk": 1,
+        "fields": {
+            "value": 0.25,
+            "quantity": 0,
+            "type": "QUARTER"
+        }
+    }
+]
