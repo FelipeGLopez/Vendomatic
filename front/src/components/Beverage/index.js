@@ -7,10 +7,11 @@ const BeverageList = (props) => {
   const buyItem = (id, name) => {
     axiosInstance
       .put(`/inventory/${id}/`)
-      .then((response) => response.headers)
+      // .then((response) => response)
       .then(
-        (data) => {
-          setCoins(data["x-coins"]);
+        (response) => {
+          setCoins(response.headers["x-coins"]);
+          setText(`You bought ${response.data.quantity} ${name}!`);
         },
         (error) => {
           if (error.response.status === 404) {
