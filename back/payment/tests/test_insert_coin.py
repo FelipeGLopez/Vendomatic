@@ -9,11 +9,12 @@ from payment.models import Coin
 logger = logging.getLogger(__name__)
 
 
-class CoinViewTestCase(TestCase):
+class CoinPutTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.path = "/"
 
+        # Creates a quarter with quantity 0.
         self.coin = Coin.objects.create(
             **{"value": 0.25, "quantity": 0, "type": "QUARTER"}
         )
@@ -93,3 +94,28 @@ class CoinViewTestCase(TestCase):
         assert response.status_code == 400
         assert int(response.headers["X-Coins"]) == 0
         assert self.coin.quantity == 0
+
+    def test_put_successive_coins_then_success(self):
+        data = {"coin": 1}
+        assert self.coin.quantity == 0
+        response = self.client.generic(
+            method="PUT",
+            path=self.path,
+            data=json.dumps(data),
+            content_type="application/json",
+        )
+        self.coin.refresh_from_db()
+        assert response.status_code == 204
+        assert int(response.headers["X-Coins"]) == 1
+        assert self.coin.quantity == 1
+        # Instert another coin
+        response = self.client.generic(
+            method="PUT",
+            path=self.path,
+            data=json.dumps(data),
+            content_type="application/json",
+        )
+        self.coin.refresh_from_db()
+        assert response.status_code == 204
+        assert int(response.headers["X-Coins"]) == 2
+        assert self.coin.quantity == 2
