@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import BeverageList from "../components/BeverageList";
+import InsertionButton from "../components/InsertionButton";
+import DeletionButton from "../components/DeletionButton";
+import Text from "../components/Text";
 import { axiosInstance } from "../utils/axiosInstance";
 
 const Vendomatic = () => {
@@ -9,27 +12,6 @@ const Vendomatic = () => {
   const [coins, setCoins] = useState(0);
   const [text, setText] = useState("Welcome!");
 
-  const insertCoinHandler = (coin) => {
-    axiosInstance
-      .put("/", { coin })
-      .then((response) => response.headers)
-      .then(
-        (data) => setCoins(data["x-coins"]),
-        (error) => console.log(error)
-      );
-  };
-  const retrieveCoins = () => {
-    axiosInstance
-      .delete("/")
-      .then((response) => response.headers)
-      .then(
-        (data) => {
-          setText(`${data["x-coins"]} coins retrieved`);
-          setCoins(0);
-        },
-        (error) => console.log(error)
-      );
-  };
   const getInventory = () => {
     axiosInstance
       .get("/inventory/")
@@ -68,21 +50,9 @@ const Vendomatic = () => {
             setCoins={setCoins}
             setText={setText}
           />
-          <h5 style={{ margin: "2%" }}>
-            Current credit: {coins} quarter coins
-            <br />
-            {text}
-          </h5>
-          <button
-            className="btn btn-success"
-            style={{ margin: "2%" }}
-            onClick={() => insertCoinHandler(1)}
-          >
-            Insert Quarter Coin
-          </button>
-          <button className="btn btn-dark" onClick={() => retrieveCoins()}>
-            Get Coins
-          </button>
+          <Text coins={coins} text={text} />
+          <InsertionButton setCoins={setCoins} />
+          <DeletionButton setCoins={setCoins} setText={setText} />
         </>
       )}
     </>
