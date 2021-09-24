@@ -7,7 +7,7 @@ const Vendomatic = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [beverages, setBeverages] = useState([]);
   const [coins, setCoins] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState("Welcome!");
 
   const insertCoinHandler = (coin) => {
     axiosInstance
@@ -70,8 +70,9 @@ const Vendomatic = () => {
           />
           <h5 style={{ margin: "2%" }}>
             Current credit: {coins} quarter coins
+            <br />
+            {text}
           </h5>
-          <h5 style={{ margin: "2%" }}>{text}</h5>
           <button
             className="btn btn-success"
             style={{ margin: "2%" }}
