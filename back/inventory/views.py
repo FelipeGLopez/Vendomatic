@@ -24,7 +24,8 @@ class InventoryViewSet(viewsets.ViewSet):
         coin = Coin.objects.filter(type=coin_type).first()
         if beverage.quantity > 0:
             if beverage.value <= coin.quantity * coin.value:
-                # Subtracts just 1 in quantity and returns that.
+                # Subtracts just 1 in quantity and returns the
+                # ... new quantity in the headers.
                 beverage.quantity -= 1
                 beverage.save()
                 # Generic operation, but with the given requirements
