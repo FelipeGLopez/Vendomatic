@@ -30,10 +30,7 @@ const Vendomatic = () => {
         (error) => console.log(error)
       );
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-
+  const getInventory = () => {
     axiosInstance
       .get("/inventory/")
       .then((response) => response.data)
@@ -41,7 +38,11 @@ const Vendomatic = () => {
         (data) => setBeverages(data),
         (error) => console.log(error)
       );
+  };
 
+  useEffect(() => {
+    setIsLoading(true);
+    getInventory();
     setIsLoading(false);
   }, [coins]);
 
