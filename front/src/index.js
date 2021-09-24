@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import VendomaticMainPage from "./pages/VendomaticMainPage";
+import Vendomatic from "./pages/Vendomatic";
 import reportWebVitals from "./reportWebVitals";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <VendomaticMainPage />
+    <Vendomatic />
   </React.StrictMode>,
   document.getElementById("root")
 );

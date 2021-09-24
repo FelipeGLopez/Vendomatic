@@ -1,12 +1,12 @@
 import React from "react";
-import axios from "axios";
+import { axiosInstance } from "../../utils/axiosInstance";
 
 const BeverageList = (props) => {
   const { items, setCoins, setText } = props;
 
   const buyItem = (id, name) => {
-    axios
-      .put(`http://localhost:8000/inventory/${id}/`)
+    axiosInstance
+      .put(`/inventory/${id}/`)
       .then((response) => response.headers)
       .then(
         (data) => {
@@ -28,22 +28,36 @@ const BeverageList = (props) => {
 
   return (
     items.length >= 0 && (
-      <>
+      <div className="row">
         {items.map((item) => {
           return (
             <div key={item.id}>
-              <div>Beverage: {item.name}</div>
-              <div>$ {item.value}</div>
-              <div>Remaining: {item.quantity}</div>
-              <div>
-                <button onClick={() => buyItem(item.id, item.name)}>
-                  Buy {item.name}
-                </button>
+              <div className="col-sm-6">
+                <div className="card" style={{ margin: "2%" }}>
+                  <div className="card-body">
+                    <h5 className="card-title">Beverage: {item.name}</h5>
+                    <div className="card-text">$ {item.value}</div>
+                    <div
+                      style={{ color: item.quantity === 0 ? "red" : null }}
+                      className="card-text"
+                    >
+                      Remaining: {item.quantity}
+                    </div>
+                    <div>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => buyItem(item.id, item.name)}
+                      >
+                        Buy {item.name}
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           );
         })}
-      </>
+      </div>
     )
   );
 };

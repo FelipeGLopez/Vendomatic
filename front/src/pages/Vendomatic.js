@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import BeverageList from "../components/Beverage";
-import axios from "axios";
+import { axiosInstance } from "../utils/axiosInstance";
 
-const MachineStorePage = () => {
+const Vendomatic = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [beverages, setBeverages] = useState([]);
   const [coins, setCoins] = useState(0);
   const [text, setText] = useState("");
 
   const insertCoinHandler = (coin) => {
-    axios
-      .put("http://localhost:8000/", { coin })
+    axiosInstance
+      .put("/", { coin })
       .then((response) => response.headers)
       .then(
         (data) => setCoins(data["x-coins"]),
@@ -19,8 +19,8 @@ const MachineStorePage = () => {
       );
   };
   const retrieveCoins = () => {
-    axios
-      .delete("http://localhost:8000/")
+    axiosInstance
+      .delete("/")
       .then((response) => response.headers)
       .then(
         (data) => {
@@ -34,9 +34,9 @@ const MachineStorePage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios
-      .get("http://localhost:8000/inventory/")
-      .then((response) => response.json())
+    axiosInstance
+      .get("/inventory/")
+      .then((response) => response.data)
       .then(
         (data) => setBeverages(data),
         (error) => console.log(error)
@@ -54,16 +54,24 @@ const MachineStorePage = () => {
             setCoins={setCoins}
             setText={setText}
           />
-          <div>Current credit: {coins} quarter coins</div>
-          <div>{text}</div>
-          <button onClick={() => insertCoinHandler(1)}>
+          <h5 style={{ margin: "2%" }}>
+            Current credit: {coins} quarter coins
+          </h5>
+          <h5 style={{ margin: "2%" }}>{text}</h5>
+          <button
+            className="btn btn-success"
+            style={{ margin: "2%" }}
+            onClick={() => insertCoinHandler(1)}
+          >
             Insert Quarter Coin
           </button>
-          <button onClick={() => retrieveCoins()}>Get Coins</button>
+          <button className="btn btn-dark" onClick={() => retrieveCoins()}>
+            Get Coins
+          </button>
         </>
       )}
     </>
   );
 };
 
-export default MachineStorePage;
+export default Vendomatic;
