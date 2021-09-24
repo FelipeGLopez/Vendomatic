@@ -11,26 +11,30 @@ logger = logging.getLogger(__name__)
 
 
 class CoinView(APIView):
+    def __init__(self):
+        coin_type = Coin.CoinValues.QUARTER
+        self.coin = Coin.objects.filter(type=coin_type).first()
+
     def put(self, request):
         coin_quantity = request.data.get("coin")
-        coin_type = Coin.CoinValues.QUARTER
-        coin = Coin.objects.filter(type=coin_type).first()
         if coin_quantity and 0 < coin_quantity <= settings.MAX_COINS_ALLOWED:
-            coin.quantity += coin_quantity
-            coin.save()
+            self.coin.quantity += coin_quantity
+            self.coin.save()
             return Response(
-                status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": coin.quantity}
+                status=status.HTTP_204_NO_CONTENT,
+                headers={"X-Coins": self.coin.quantity},
             )
         return Response(
-            status=status.HTTP_400_BAD_REQUEST, headers={"X-Coins": coin.quantity}
+            status=status.HTTP_400_BAD_REQUEST, headers={"X-Coins": self.coin.quantity}
         )
 
+    def get(self, request):
+        return Response({"quantity": self.coin.quantity})
+
     def delete(self, request):
-        coin_type = Coin.CoinValues.QUARTER
-        coin = Coin.objects.filter(type=coin_type).first()
-        remaining_coins = coin.quantity
-        coin.quantity = 0
-        coin.save()
+        remaining_coins = self.coin.quantity
+        self.coin.quantity = 0
+        self.coin.save()
         return Response(
             status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": remaining_coins}
         )
