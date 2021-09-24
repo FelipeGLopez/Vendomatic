@@ -38,6 +38,11 @@ poetry shell
 ```
 ./manage.py runserver
 ```
+
+- Optionally, if you want to run the tests:
+```
+./manage.py test
+```
 ## Frontend
 
 Make sure you have node >= 14.0.0. and npm >= 5.6 in order to have all running flawlessly.
@@ -45,6 +50,3 @@ Make sure you have node >= 14.0.0. and npm >= 5.6 in order to have all running f
 Open a new terminal in the `front` folder, and then execute `npm install` to install dependencies.
 
 To run the project locally, execute: `npm start`
-
-
-
