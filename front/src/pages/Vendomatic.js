@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import BeverageList from "../components/Beverage";
+import BeverageList from "../components/BeverageList";
 import { axiosInstance } from "../utils/axiosInstance";
 
 const Vendomatic = () => {
