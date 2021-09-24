@@ -43,6 +43,11 @@ poetry shell
 ```
 ./manage.py test
 ```
+
+- If you run out of beverages, you can run the following command:
+```
+./manage.py loaddata fixtures/beverages.json
+```
 ## Frontend
 
 Make sure you have node >= 14.0.0. and npm >= 5.6 in order to have all running flawlessly.
