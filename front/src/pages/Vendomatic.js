@@ -39,6 +39,19 @@ const Vendomatic = () => {
         (error) => console.log(error)
       );
   };
+  const getQuarterQuantity = () => {
+    axiosInstance
+      .get("/")
+      .then((response) => response.data)
+      .then(
+        (data) => setCoins(data.quantity),
+        (error) => console.log(error)
+      );
+  };
+
+  useEffect(() => {
+    getQuarterQuantity();
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
