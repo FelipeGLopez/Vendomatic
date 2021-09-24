@@ -65,7 +65,7 @@ class CoinViewTestCase(TestCase):
         assert int(response.headers["X-Coins"]) == 1
         assert self.coin.quantity == 1
 
-    def test_put_lower_than_1_coin_then_success(self):
+    def test_put_lower_than_1_coin_then_error(self):
         # 0 coin
         data = {"coin": 0}
         assert self.coin.quantity == 0
